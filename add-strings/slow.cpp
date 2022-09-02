@@ -16,10 +16,10 @@ string addStrings(string num1, string num2) {
         res.insert(res.begin(), total);
         xi--; yi--;
     }
-    
+
     if (carry > 0) {
         res.insert(res.begin(), 0x31);
     }
-    
+
     return res;
 }
