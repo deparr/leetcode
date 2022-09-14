@@ -1,16 +1,24 @@
-func rob(nums []int) int {
-	curr, prev := 0, 0
+package main
 
-	// [curr, prev, v, v+1]
+import "fmt"
+
+func rob(nums []int) int {
+	prev_max, running_max := 0, 0
+
+	// [prev_max, running_max, v, v+1]
 	for _, v := range nums {
-		tmp := prev
-		if v+curr > tmp {
-			tmp = v + curr
+		tmp := running_max
+		if v+prev_max > tmp {
+			tmp = v + prev_max
 		}
 
-		curr = prev
-		prev = tmp
+		prev_max = running_max
+		running_max = tmp
 	}
 
-	return prev
+	return running_max
+}
+
+func main() {
+	fmt.Println(rob([]int{2, 7, 9, 3, 1}))
 }
