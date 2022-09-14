@@ -29,7 +29,10 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			l2 = l2.Next
 		}
 
-		if (l1 != nil) || (l2 != nil) || carry > 0 {
+		if (l1 != nil) || (l2 != nil) {
+			tmp.Next = &ListNode{0, nil}
+			tmp = tmp.Next
+		} else if carry > 0 {
 			tmp.Next = &ListNode{0, nil}
 			tmp = tmp.Next
 		}
