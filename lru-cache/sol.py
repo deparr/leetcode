@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 class LRUCache:
     class ListNode:
         def __init__(self, val=0, key=0, prev=None, next=None):
