@@ -13,12 +13,11 @@ func pacificAtlantic(heights [][]int) [][]int {
             return
         }
         
-        if x >= len(height) || y >= len(height[0]) {
+        if x >= len(heights) || y >= len(heights[0]) {
             visited[coord] += 2
             return
         }
         
-        if heights()
     }
     
     
