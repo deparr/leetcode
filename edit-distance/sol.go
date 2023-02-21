@@ -1,39 +1,43 @@
 func minDistance(word1 string, word2 string) int {
-	arr := make([][]int, len(word2)+1)
-	for i := range arr {
-		arr[i] = make([]int, len(word1)+1)
-	}
+	// Storing the cost grid takes O(m * n) space
+	m, n := len(word1) + 1, len(word2) + 1
+    costGrid := make([][]int, n)
 
-	for i := range arr[0] {
-		arr[0][i] = i
-	}
+    for row := range costGrid {
+        costGrid[row] = make([]int, m)
+    } 
+    for col := range costGrid[0] {
+        costGrid[0][col] = col
+    } 
+    for row := range costGrid {
+        costGrid[row][0] = row
+    }
 
-	for i := range arr {
-		arr[i][0] = i
-	}
-
-	for i := 1; i < len(arr); i++ {
-		for j := 1; j < len(arr[i]); j++ {
-
-			if word1[j-1] == word2[i-1] {
-				arr[i][j] = arr[i-1][j-1]
-
-			} else {
-				sc := arr[i-1][j] + 1
-
-				if arr[i-1][j-1]+1 < sc {
-					sc = arr[i-1][j-1] + 1
-				}
-
-				if arr[i][j-1]+1 < sc {
-					sc = arr[i][j-1] + 1
-				}
-
-				arr[i][j] = sc
-			}
+	// Filling in the grid takes O(m * n) time
+    for i := 1; i < n; i++ {
+        for j := 1; j < m; j++ { 
+            if word1[j-1] == word2[i-1] {
+                costGrid[i][j] = costGrid[i-1][j-1]
+            } else {
+                costGrid[i][j] = minScore(i, j, costGrid)
+            }
 		}
-	}
-
-	return arr[len(word2)][len(word1)]
-
+    }
+    
+    return costGrid[n-1][m-1] 
 }
+
+func minScore(i, j int, costGrid [][]int) int {
+	score := costGrid[i-1][j] + 1
+
+    if costGrid[i-1][j-1] + 1 < score {
+		score = costGrid[i-1][j-1] + 1
+    }
+
+	if costGrid[i][j-1] + 1 < score {
+        score = costGrid[i][j-1] + 1
+    }
+
+	return score
+}
+
