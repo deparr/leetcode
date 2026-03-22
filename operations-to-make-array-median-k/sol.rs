@@ -10,6 +10,7 @@ impl Solution {
             (nums[nums.len() / 2], nums.len() / 2)
         };
 
+
         if median == k {
             return 0;
         }
